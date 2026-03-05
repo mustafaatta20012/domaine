@@ -503,7 +503,8 @@
 
 .service-item:hover .service-btn i {
     transform: rotate(360deg);
-    color: var(--bs-white) !important;
+    color: wihite !important;
+    z-index: 5645 !important;
 }
 
 /*** Service End ***/
