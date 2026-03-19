@@ -1,24 +1,49 @@
 /* ==========================================
-   SPINNER LOADER
-   Hide loading spinner after full page load
+   PAGE LOAD (Spinner + Phone Animation)
 ========================================== */
 
 window.addEventListener("load", function () {
+  // Spinner
   const spinner = document.getElementById("spinner");
-
   if (spinner) {
     spinner.classList.remove("show");
-
-    // تأخير بسيط لإعطاء تأثير تلاشي ناعم
-    setTimeout(function () {
-      spinner.style.display = "none";
-    }, 500);
   }
+
+  // Animate phone numbers
+  animatePhoneNumbers();
 });
 
 /* ==========================================
-   BACK TO TOP BUTTON
-   Show when scrolling down, hide when up
+   ANIMATE PHONE NUMBERS
+========================================== */
+
+function animatePhoneNumbers() {
+  const numbers = document.querySelectorAll(".phone-number");
+
+  numbers.forEach((el) => {
+    const finalNumber = el.dataset.number;
+
+    // حماية من الأخطاء
+    if (!finalNumber) return;
+
+    let current = "";
+    let i = 0;
+
+    function typeNumber() {
+      if (i < finalNumber.length) {
+        current += finalNumber[i];
+        el.textContent = current;
+        i++;
+        setTimeout(typeNumber, 120);
+      }
+    }
+
+    typeNumber();
+  });
+}
+
+/* ==========================================
+   BACK TO TOP BUTTON (jQuery only)
 ========================================== */
 
 let lastScrollTop = 0;
@@ -46,31 +71,3 @@ window.addEventListener("scroll", function () {
 
   lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
 });
-// show number phone 
-
-//     function animatePhoneNumbers() {
-
-//   const numbers = document.querySelectorAll(".phone-number");
-
-//   numbers.forEach(el => {
-
-//     const finalNumber = el.dataset.number;
-//     let current = "";
-//     let i = 0;
-
-//     function typeNumber() {
-//       if (i < finalNumber.length) {
-//         current += finalNumber[i];
-//         el.textContent = current;
-//         i++;
-//         setTimeout(typeNumber, 120);
-//       }
-//     }
-
-//     typeNumber();
-
-//   });
-
-// }
-
-// window.addEventListener("load", animatePhoneNumbers);
